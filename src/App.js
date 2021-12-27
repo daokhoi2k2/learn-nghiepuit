@@ -62,15 +62,19 @@ function App() {
 */
 
 class App extends Component {
-  handleStart = () => {
-    console.log("Start", this.refs.start.value);
+  constructor(props) {
+    super(props);
+    this.start = React.createRef();
+    this.stop = React.createRef();
   }
+  handleStart = () => {
+    console.log("Start", this);
+  };
 
   handleStop = () => {
-    console.log("Stop", this.refs.stop.value);
-  }
+    console.log("Stop", this);
+  };
   render() {
-    
     console.log(this);
     return (
       <div>
@@ -95,8 +99,12 @@ class App extends Component {
             image='https://picsum.photos/600/300'
           />
         </div>
-        <button ref="start" onClick={this.handleStart}>Start</button>
-        <button ref="stop" onClick={this.handleStop}>Stop</button>
+        <button ref={this.start} onClick={this.handleStart}>
+          Start
+        </button>
+        <button ref={this.stop} onClick={this.handleStop}>
+          Stop
+        </button>
       </div>
     );
   }
