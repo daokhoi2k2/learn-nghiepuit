@@ -6,13 +6,20 @@ console.log("Root rerender")
 function App() {
   const [number, setNumber] = useState(60);
   const timerId = useRef();
+  const prevValue = useRef();
   
   const handleStart = () => {
     timerId.current = setInterval(() => {
-      setNumber(prev => prev - 1);
+      setNumber(prev => {
+        prevValue.current = prev;
+        console.log("Prev value -> ", prevValue.current);
+        console.log("Current value -> ", prev - 1);
+        return prev - 1
+      });
     }, 1000);
     console.log("Start -> ", timerId.current)
   }
+
 
   const handleStop = () => {
     clearInterval(timerId.current);
@@ -42,8 +49,8 @@ function App() {
           image='https://picsum.photos/600/300'
         />
       </div>
-      <button ref="start" onClick={handleStart}>Start</button>
-      <button ref="stop" onClick={handleStop}>Stop</button>
+      <button onClick={handleStart}>Start</button>
+      <button onClick={handleStop}>Stop</button>
     </>
   );
 }
