@@ -1,8 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "./components/Header";
 import Product from "./components/Product";
+import { Component } from "react/cjs/react.production.min";
 
-console.log("Root rerender")
+console.log("Root rerender");
+/*
 function App() {
   const [number, setNumber] = useState(60);
   const timerId = useRef();
@@ -56,6 +58,48 @@ function App() {
       <button ref={stop} onClick={handleStop}>Stop</button>
     </>
   );
+}
+*/
+
+class App extends Component {
+  handleStart = () => {
+    console.log("Start", this.refs.start.value);
+  }
+
+  handleStop = () => {
+    console.log("Stop", this.refs.stop.value);
+  }
+  render() {
+    
+    console.log(this);
+    return (
+      <div>
+        <Header />
+        <div>Number: 0</div>
+        <div className='d-flex'>
+          <Product
+            name='CSGO'
+            price='360.000đ'
+            image='https://picsum.photos/600/300'
+          >
+            ASD
+          </Product>
+          <Product
+            name='PUBG'
+            price='320.000đ'
+            image='https://picsum.photos/600/300'
+          />
+          <Product
+            name='Sea Of Thieves'
+            price='250.000đ'
+            image='https://picsum.photos/600/300'
+          />
+        </div>
+        <button ref="start" onClick={this.handleStart}>Start</button>
+        <button ref="stop" onClick={this.handleStop}>Stop</button>
+      </div>
+    );
+  }
 }
 
 export default App;
