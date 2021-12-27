@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Header from "./components/Header";
+import Test from "./components/Test";
 import Product from "./components/Product";
 import { Component } from "react/cjs/react.production.min";
 
@@ -88,17 +89,16 @@ class App extends Component {
 
   handleClearState = () => {
     this.setState({
-      isActive: !this.state.isActive
-    })
-  }
+      isActive: !this.state.isActive,
+    });
+  };
 
-
-  
   render() {
     console.log("Re-render", this.state);
     return (
       <div>
-        <Header title="State" />
+        <Header title='State' />
+        <Test />
         <div className='container'>
           <table className='table'>
             <thead>
@@ -109,8 +109,8 @@ class App extends Component {
               </tr>
             </thead>
             <tbody>
-              {
-                this.state.isActive ? this.state.products.map((item) => {
+              {this.state.isActive ? (
+                this.state.products.map((item) => {
                   return (
                     <tr key={item.id}>
                       <td scope='row'>{item.id}</td>
@@ -118,11 +118,17 @@ class App extends Component {
                       <td>{item.price} VNĐ</td>
                     </tr>
                   );
-                }) : <tr><td>Sản phẩm đã bị ẩn</td></tr>
-              }
+                })
+              ) : (
+                <tr>
+                  <td>Sản phẩm đã bị ẩn</td>
+                </tr>
+              )}
             </tbody>
           </table>
-          <button onClick={this.handleClearState} className='btn btn-primary'> {this.state.isActive ? "Active" : "Deactive" }</button>
+          <button onClick={this.handleClearState} className='btn btn-primary'>
+            {this.state.isActive ? "Active" : "Deactive"}
+          </button>
         </div>
       </div>
     );

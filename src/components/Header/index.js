@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Header = ({title}) => {
-    title = "Học";
     return (
         <div>
             <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
