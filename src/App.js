@@ -64,47 +64,66 @@ function App() {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.start = React.createRef();
-    this.stop = React.createRef();
+    this.state = {
+      products: [
+        {
+          id: 1,
+          name: "Apple Iphone 6 Plus 16GB",
+          price: 15000000,
+        },
+        {
+          id: 2,
+          name: "Laptop Gamming MSI",
+          price: 2300000,
+        },
+        {
+          id: 3,
+          name: "Xe máy honda Winner",
+          price: 54000000,
+        },
+      ],
+      isActive: true,
+    };
   }
-  handleStart = () => {
-    console.log("Start", this);
-  };
 
-  handleStop = () => {
-    console.log("Stop", this);
-  };
+  handleClearState = () => {
+    this.setState({
+      isActive: !this.state.isActive
+    })
+  }
+
+
+  
   render() {
-    console.log(this);
+    console.log("Re-render", this.state);
     return (
       <div>
-        <Header />
-        <div>Number: 0</div>
-        <div className='d-flex'>
-          <Product
-            name='CSGO'
-            price='360.000đ'
-            image='https://picsum.photos/600/300'
-          >
-            ASD
-          </Product>
-          <Product
-            name='PUBG'
-            price='320.000đ'
-            image='https://picsum.photos/600/300'
-          />
-          <Product
-            name='Sea Of Thieves'
-            price='250.000đ'
-            image='https://picsum.photos/600/300'
-          />
+        <Header title="State" />
+        <div className='container'>
+          <table className='table'>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên sản phẩm</th>
+                <th>Giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                this.state.isActive ? this.state.products.map((item) => {
+                  return (
+                    <tr key={item.id}>
+                      <td scope='row'>{item.id}</td>
+                      <td>{item.name}</td>
+                      <td>{item.price} VNĐ</td>
+                    </tr>
+                  );
+                }) : <tr><td>Sản phẩm đã bị ẩn</td></tr>
+              }
+            </tbody>
+          </table>
+          <button onClick={this.handleClearState} className='btn btn-primary'> {this.state.isActive ? "Active" : "Deactive" }</button>
         </div>
-        <button ref={this.start} onClick={this.handleStart}>
-          Start
-        </button>
-        <button ref={this.stop} onClick={this.handleStop}>
-          Stop
-        </button>
       </div>
     );
   }

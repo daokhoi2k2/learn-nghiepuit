@@ -1,10 +1,11 @@
 import React from 'react';
 
-const Header = () => {
+const Header = ({title}) => {
+    title = "Học";
     return (
         <div>
             <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
-                <a className="navbar-brand" href="#">Navbar</a>
+                <a className="navbar-brand" href="#">{title}</a>
                 <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                     aria-expanded="false" aria-label="Toggle navigation"></button>
                 <div className="collapse navbar-collapse" id="collapsibleNavId">
