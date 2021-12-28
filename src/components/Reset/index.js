@@ -1,9 +1,18 @@
 import React from "react";
 import "./style.css";
 
-const Reset = () => {
+const Reset = ({ data }) => {
+  const handleReset = () => {
+    data.setState({
+      fontSize: 8,
+      color: "red"
+    })
+  };
+
   return (
-    <button className="btn btn-primary m-3">Reset</button>
+    <button onClick={handleReset} className='btn btn-primary m-3'>
+      Reset
+    </button>
   );
 };
 
