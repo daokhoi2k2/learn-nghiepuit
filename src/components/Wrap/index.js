@@ -9,20 +9,43 @@ class Wrap extends Component {
     super(props);
     this.state = {
       fontSize: 16,
-      color: "red"
-    }
+      color: "red",
+    };
   }
 
+  onSetColor = (color) => {
+    this.setState({
+      color: color,
+    });
+  };
+
+  onSetFontSize = (fontSize) => {
+    this.setState({
+      fontSize,
+    });
+  };
+
   render() {
-    console.log("Re-render Wrap")
+    console.log("Re-render Wrap");
     return (
       <>
         <div className='container mt-5'>
           <div className='d-flex justify-content-between'>
-            <ColorPicker data={this} />
-            <SizeSetting data={this} />
+            <ColorPicker
+              color={this.state.color}
+              onReceiveColor={this.onSetColor}
+            />
+            <SizeSetting
+              fontSize={this.state.fontSize}
+              onReceiveFontSize={this.onSetFontSize}
+              onReceiveColor={this.onSetColor}
+            />
           </div>
-          <Result className='mt-5' color={this.state.color} fontSize={this.state.fontSize} />
+          <Result
+            className='mt-5'
+            color={this.state.color}
+            fontSize={this.state.fontSize}
+          />
         </div>
       </>
     );

@@ -6,13 +6,10 @@ class ColorPicker extends Component {
   constructor(props) {
     super(props);
     this.colorItem = createRef();
-    this.stateApp = props.data;
   }
 
   colorPick = (target, color) => {
-    this.stateApp.setState({
-      color: color,
-    });
+    this.props.onReceiveColor(color);
   };
 
   render() {
@@ -24,7 +21,7 @@ class ColorPicker extends Component {
             <div
               onClick={(e) => this.colorPick(e.target, "red")}
               className={
-                this.stateApp.state.color === "red"
+                this.props.color === "red"
                   ? "color_item red active"
                   : "color_item red"
               }
@@ -32,7 +29,7 @@ class ColorPicker extends Component {
             <div
               onClick={(e) => this.colorPick(e.target, "green")}
               className={
-                this.stateApp.state.color === "green"
+                this.props.color === "green"
                   ? "color_item green active"
                   : "color_item green"
               }
@@ -40,7 +37,7 @@ class ColorPicker extends Component {
             <div
               onClick={(e) => this.colorPick(e.target, "blue")}
               className={
-                this.stateApp.state.color === "blue"
+                this.props.color === "blue"
                   ? "color_item blue active"
                   : "color_item blue"
               }
@@ -48,7 +45,7 @@ class ColorPicker extends Component {
             <div
               onClick={(e) => this.colorPick(e.target, "gray")}
               className={
-                this.stateApp.state.color === "gray"
+                this.props.color === "gray"
                   ? "color_item gray active"
                   : "color_item gray"
               }

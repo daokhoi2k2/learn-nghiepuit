@@ -5,21 +5,12 @@ import { Component } from "react/cjs/react.production.min";
 // import SizeSetting from "./components/SizeSetting";
 import Wrap from "./components/Wrap";
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fontSize: 8,
-      color: "red"
-    }
-    console.log("Print in constuctor");
-  }
 
   render() {
     console.log("Re-render App")
     return (
       <>
         <Wrap />
-        {console.log("Print in return render")}
       </>
     );
   }
