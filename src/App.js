@@ -11,6 +11,7 @@ class App extends Component {
       tasks: JSON.parse(localStorage.getItem("tasks")) || [],
       taskShow: false,
     };
+    console.log("App Constructor")
   }
 
   handleMockData = () => {
@@ -63,19 +64,45 @@ class App extends Component {
   }
 
   showForm = () => {
-    console.log("Show form")
+    console.log("Show form");
     this.setState({
-      taskShow: true
-    })
-  }
+      taskShow: true,
+    });
+  };
 
   handleExit = () => {
     this.setState({
-      taskShow: false
-    })
-  }
+      taskShow: false,
+    });
+  };
+
+  // Cách này làm khá dài dòng do chưa áp dụng Referrence
+  // addWorkItem = (item) => {
+  //   item.id = this.generateID();
+  //   this.setState((prev) => {
+  //     return {
+  //       ...prev,
+  //       tasks: [...prev.tasks, item]
+  //     };
+  //   });
+  // };
+
+  addWorkItem = (item) => {
+    const { tasks } = this.state;
+    item.id = this.generateID();
+    tasks.push(item);
+    this.setState({
+      tasks: [...tasks],
+    });
+    // Đã tìm ra được nguyên nhân khiến Table không re-render khi sử dụng HOC React.memo
+    // Lý do: giá trị thay đổi phải là 1 state khác (Không được sử dụng refenrence để ghi đè giá trị cũ) (Phải tìm hiểu kỹ hơn)
+    // Cái tasks tham số là nguyên nhân khiến table không re-render
+    console.log(tasks);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  };
 
   render() {
+    console.log("Re-render app");
     return (
       <>
         <div className='container'>
@@ -86,10 +113,19 @@ class App extends Component {
           <div className='row'>
             {this.state.taskShow && (
               <div className='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
-                <TaskForm onExit={this.handleExit}/>
+                <TaskForm
+                  onExit={this.handleExit}
+                  addWorkItem={this.addWorkItem}
+                />
               </div>
             )}
-            <div className={this.state.taskShow ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
+            <div
+              className={
+                this.state.taskShow
+                  ? "col-xs-8 col-sm-8 col-md-8 col-lg-8"
+                  : "col-xs-12 col-sm-12 col-md-12 col-lg-12"
+              }
+            >
               <button
                 onClick={this.showForm}
                 type='button'
