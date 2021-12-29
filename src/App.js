@@ -9,45 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       tasks: JSON.parse(localStorage.getItem("tasks")) || [],
-      isShow: true,
+      taskShow: false,
     };
-    console.log("Constructor")
-  }
-
-  // Sẽ chạy trước khi Component được render
-  componentWillMount() {
-    console.log("App Will Mount");
-  }
-
-  // Sẽ chạy sau khi Component được render
-  componentDidMount() {
-    console.log("App mounted");
-  }
-
-  // Sẽ chạy trước khi Component bị unmount
-  componentWillUnmount() {
-    console.log("App will unmount");
-  }
-
-  // 
-  componentWillReceiveProps() {
-    console.log("Sẽ thay đổi props");
-  }
-
-  // Return true nếu update false sẽ dừng lại và không chạy vào componentDidUpdate và componentWillUpdate
-  shouldComponentUpdate() {
-    console.log("Nên re-render")
-    return true;
-  }
-  
-  // Sẽ chạy sau khi component được update và UI được render và shouldComponentUpdate trả về true
-  componentDidUpdate() {
-    console.log("App did updated");
-  }
-  
-  // Sẽ chạy khi component sẽ update và chạy trước componentDidUpdate 
-  componentWillUpdate() {
-    console.log("App will update")
   }
 
   handleMockData = () => {
@@ -55,22 +18,22 @@ class App extends Component {
       {
         id: this.generateID(),
         name: "Học lập trình",
-        statis: false,
+        status: false,
       },
       {
         id: this.generateID(),
         name: "Tiêm vacine",
-        statis: true,
+        status: true,
       },
       {
         id: this.generateID(),
         name: "Ăn cơm",
-        statis: true,
+        status: true,
       },
-    ]
-    
+    ];
+
     this.setState({
-      tasks
+      tasks,
     });
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -99,27 +62,39 @@ class App extends Component {
     );
   }
 
-  toggleIsShow = () => {
+  showForm = () => {
+    console.log("Show form")
     this.setState({
-      isShow: !this.state.isShow
+      taskShow: true
+    })
+  }
+
+  handleExit = () => {
+    this.setState({
+      taskShow: false
     })
   }
 
   render() {
     return (
       <>
-      {console.log("Render UI")}
         <div className='container'>
           <div className='text-center'>
             <h1>Quản Lý Công Việc</h1>
             <hr />
           </div>
           <div className='row'>
-            <div className='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
-              <TaskForm />
-            </div>
-            <div className='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
-              <button onClick={this.toggleIsShow} type='button' className='btn btn-primary mt-3 mb-3'>
+            {this.state.taskShow && (
+              <div className='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+                <TaskForm onExit={this.handleExit}/>
+              </div>
+            )}
+            <div className={this.state.taskShow ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
+              <button
+                onClick={this.showForm}
+                type='button'
+                className='btn btn-primary mt-3 mb-3'
+              >
                 Thêm Công Việc
               </button>
               <button
@@ -133,10 +108,7 @@ class App extends Component {
               <Control />
               <div className='row mt-15'>
                 <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                  {
-                    // this.state.isShow && <Table bol={this.state.tasks} />
-                    <Table bol={this.state.tasks} />
-                  }
+                  <Table tasks={this.state.tasks} />
                 </div>
               </div>
             </div>

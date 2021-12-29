@@ -4,21 +4,7 @@ import TaskItem from "../TaskItem";
 
 class Table extends Component {
 
-  componentWillReceiveProps() {
-    console.log("Props change");
-  }
-
-  componentDidMount() {
-    console.log("Table mounted");
-    console.log("[Bol]" ,this.props.bol);
-  }
-
-  componentWillUnmount() {
-    console.log("Table will unmount");
-  }
-  
   render() {
-    {console.log("Re-render Table")}
     return (
       <table className='table table-bordered table-hover'>
         <thead>
@@ -44,8 +30,11 @@ class Table extends Component {
             </td>
             <td />
           </tr>
-          <TaskItem />
-          <TaskItem />
+          {
+            this.props.tasks.map((item, index) => {
+              return <TaskItem key={item.id} stt={index} name={item.name} status={item.status} id={item.id} />
+            })
+          }
         </tbody>
       </table>
     );

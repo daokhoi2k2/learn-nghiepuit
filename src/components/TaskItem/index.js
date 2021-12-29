@@ -2,18 +2,16 @@ import React from "react";
 import { Component } from "react/cjs/react.production.min";
 
 class TaskItem extends Component {
-
-  componentDidMount() {
-    console.log("Task Item mounted");
-  }
   render() {
-    {console.log("Render Task Item")}
+    const { stt, name, status } = this.props;
     return (
       <tr>
-        <td>1</td>
-        <td>Học lập trình</td>
+        <td>{stt + 1}</td>
+        <td>{name}</td>
         <td className='text-center'>
-          <span className='label label-success'>Kích Hoạt</span>
+          <button className={status ? "btn btn-success" : "btn btn-danger"}>
+            {status ? "Kích hoạt" : "Ẩn"}
+          </button>
         </td>
         <td className='text-center'>
           <button type='button' className='btn btn-warning'>

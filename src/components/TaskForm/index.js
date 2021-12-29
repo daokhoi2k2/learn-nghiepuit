@@ -3,15 +3,12 @@ import { Component } from "react/cjs/react.production.min";
 
 class TaskForm extends Component {
 
-  componentDidMount() {
-    console.log("Task Form did mounted");
-  }
-
   render() {
     return (
       <div className='panel panel-warning'>
-        <div className='panel-heading'>
+        <div className='panel-heading d-flex justify-content-between'>
           <h3 className='panel-title'>Thêm Công Việc</h3>
+          <div onClick={this.props.onExit} style={{cursor: "pointer"}}>x</div>
         </div>
         <div className='panel-body'>
           <form>
