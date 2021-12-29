@@ -2,7 +2,12 @@ import React from "react";
 import { Component } from "react/cjs/react.production.min";
 
 class TaskItem extends Component {
+
+  componentDidMount() {
+    console.log("Task Item mounted");
+  }
   render() {
+    {console.log("Render Task Item")}
     return (
       <tr>
         <td>1</td>
@@ -26,4 +31,4 @@ class TaskItem extends Component {
   }
 }
 
-export default TaskItem;
+export default React.memo(TaskItem);

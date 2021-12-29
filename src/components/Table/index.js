@@ -3,7 +3,22 @@ import { Component } from "react/cjs/react.production.min";
 import TaskItem from "../TaskItem";
 
 class Table extends Component {
+
+  componentWillReceiveProps() {
+    console.log("Props change");
+  }
+
+  componentDidMount() {
+    console.log("Table mounted");
+    console.log("[Bol]" ,this.props.bol);
+  }
+
+  componentWillUnmount() {
+    console.log("Table will unmount");
+  }
+  
   render() {
+    {console.log("Re-render Table")}
     return (
       <table className='table table-bordered table-hover'>
         <thead>

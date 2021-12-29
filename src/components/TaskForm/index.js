@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Component } from "react/cjs/react.production.min";
 
 class TaskForm extends Component {
+
+  componentDidMount() {
+    console.log("Task Form did mounted");
+  }
+
   render() {
     return (
       <div className='panel panel-warning'>
