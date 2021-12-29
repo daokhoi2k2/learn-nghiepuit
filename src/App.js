@@ -134,7 +134,8 @@ class App extends Component {
               <div className='row mt-15'>
                 <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                   {
-                    this.state.isShow && <Table bol={this.state.tasks} />
+                    // this.state.isShow && <Table bol={this.state.tasks} />
+                    <Table bol={this.state.tasks} />
                   }
                 </div>
               </div>
