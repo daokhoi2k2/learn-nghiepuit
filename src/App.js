@@ -92,6 +92,7 @@ class App extends Component {
     item.id = this.generateID();
     tasks.push(item);
     this.setState({
+      // React.memo của Component Table sẽ không re-render khi nhận địa chỉ ô nhớ cũ. Ta phải truyền vào 1 địa chỉ ổ nhớ mới thì mới re-render
       tasks: [...tasks],
     });
     // Đã tìm ra được nguyên nhân khiến Table không re-render khi sử dụng HOC React.memo

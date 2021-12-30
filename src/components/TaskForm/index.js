@@ -19,7 +19,7 @@ class TaskForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addWorkItem({...this.state});
+    this.props.addWorkItem({...this.state}); // phỉa clone this.state để khi gán id bên App.js không bị trùng key (Vì đây là reference)
   }
 
   render() {
