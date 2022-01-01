@@ -8,22 +8,32 @@ class TaskForm extends Component {
       name: "",
       status: false,
     };
+    this.nameElement = React.createRef();
   }
 
   changeInfo = (e) => {
     const name = e.target.name;
     this.setState({
-      [name]: e.target.value
-    })
+      [name]: e.target.value,
+    });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addWorkItem({...this.state}); // phỉa clone this.state để khi gán id bên App.js không bị trùng key (Vì đây là reference)
-  }
+    this.props.addWorkItem({ ...this.state }); // phải clone this.state để khi gán id bên App.js không bị trùng key (Vì đây là reference)
+    this.onClear();
+    this.props.onExit();
+  };
+
+  onClear = () => {
+    this.setState({
+      name: "",
+      status: false
+    });
+    this.nameElement.current.focus();
+  };
 
   render() {
-    console.log("Re-render task form")
     return (
       <div className='panel panel-warning'>
         <div className='panel-heading d-flex justify-content-between'>
@@ -41,21 +51,35 @@ class TaskForm extends Component {
                 className='form-control'
                 value={this.state.name}
                 onChange={this.changeInfo}
-                name="name"
+                name='name'
+                ref={this.nameElement}
               />
             </div>
             <label>Trạng Thái :</label>
-            <select className='form-control' name="status" value={this.state.status} onChange={this.changeInfo}>
+            <select
+              className='form-control'
+              name='status'
+              value={this.state.status}
+              onChange={this.changeInfo}
+            >
               <option value={true}>Kích Hoạt</option>
               <option value={false}>Ẩn</option>
             </select>
             <br />
             <div className='text-center'>
-              <button type='submit' className='btn btn-warning'>
+              <button
+                type='submit'
+                className='btn btn-warning'
+                onClick={() => console.log(this.nameElement)}
+              >
                 Thêm
               </button>
               &nbsp;
-              <button type='submit' className='btn btn-danger'>
+              <button
+                type='button'
+                className='btn btn-danger'
+                onClick={this.onClear}
+              >
                 Hủy Bỏ
               </button>
             </div>

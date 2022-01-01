@@ -11,34 +11,7 @@ class App extends Component {
       tasks: JSON.parse(localStorage.getItem("tasks")) || [],
       taskShow: false,
     };
-    console.log("App Constructor")
   }
-
-  handleMockData = () => {
-    const tasks = [
-      {
-        id: this.generateID(),
-        name: "Học lập trình",
-        status: false,
-      },
-      {
-        id: this.generateID(),
-        name: "Tiêm vacine",
-        status: true,
-      },
-      {
-        id: this.generateID(),
-        name: "Ăn cơm",
-        status: true,
-      },
-    ];
-
-    this.setState({
-      tasks,
-    });
-
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  };
 
   v4() {
     return Math.floor((1 + Math.random()) * 0x1000)
@@ -64,7 +37,6 @@ class App extends Component {
   }
 
   showForm = () => {
-    console.log("Show form");
     this.setState({
       taskShow: true,
     });
@@ -98,12 +70,10 @@ class App extends Component {
     // Đã tìm ra được nguyên nhân khiến Table không re-render khi sử dụng HOC React.memo
     // Lý do: giá trị thay đổi phải là 1 state khác (Không được sử dụng refenrence để ghi đè giá trị cũ) (Phải tìm hiểu kỹ hơn)
     // Cái tasks tham số là nguyên nhân khiến table không re-render
-    console.log(tasks);
     localStorage.setItem("tasks", JSON.stringify(tasks));
   };
 
   render() {
-    console.log("Re-render app");
     return (
       <>
         <div className='container'>
@@ -133,14 +103,6 @@ class App extends Component {
                 className='btn btn-primary mt-3 mb-3'
               >
                 Thêm Công Việc
-              </button>
-              <button
-                type='button'
-                className='btn btn-danger mt-3 mb-3'
-                style={{ marginLeft: 15 }}
-                onClick={this.handleMockData}
-              >
-                Mock data
               </button>
               <Control />
               <div className='row mt-15'>
