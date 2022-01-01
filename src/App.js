@@ -48,6 +48,24 @@ class App extends Component {
     });
   };
 
+  toggleStatus = (id) => {
+    const index = this.state.tasks.findIndex((item) => {
+      return item.id === id;
+    });
+
+    const arrayChange = [...this.state.tasks];
+
+    arrayChange[index] = {
+      ...arrayChange[index],
+      status: !arrayChange[index].status,
+    };
+    this.setState({
+      tasks: arrayChange,
+    });
+
+    localStorage.setItem("tasks", JSON.stringify(arrayChange));
+  };
+
   // Cách này làm khá dài dòng do chưa áp dụng Referrence
   // addWorkItem = (item) => {
   //   item.id = this.generateID();
@@ -107,7 +125,10 @@ class App extends Component {
               <Control />
               <div className='row mt-15'>
                 <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                  <Table tasks={this.state.tasks} />
+                  <Table
+                    tasks={this.state.tasks}
+                    toggleStatus={this.toggleStatus}
+                  />
                 </div>
               </div>
             </div>

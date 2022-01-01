@@ -3,13 +3,13 @@ import { Component } from "react/cjs/react.production.min";
 
 class TaskItem extends Component {
   render() {
-    const { stt, name, status } = this.props;
+    const { stt, name, status, toggleStatus} = this.props;
     return (
       <tr>
         <td>{stt + 1}</td>
         <td>{name}</td>
         <td className='text-center'>
-          <button className={status ? "btn btn-success" : "btn btn-danger"}>
+          <button className={status ? "btn btn-success" : "btn btn-danger"} onClick={toggleStatus} >
             {status ? "Kích hoạt" : "Ẩn"}
           </button>
         </td>

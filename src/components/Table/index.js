@@ -3,7 +3,6 @@ import { Component } from "react/cjs/react.production.min";
 import TaskItem from "../TaskItem";
 
 class Table extends Component {
-
   render() {
     return (
       <table className='table table-bordered table-hover'>
@@ -32,7 +31,7 @@ class Table extends Component {
           </tr>
           {
             this.props.tasks.map((item, index) => {
-              return <TaskItem key={item.id} stt={index} name={item.name} status={item.status} id={item.id} />
+              return <TaskItem key={item.id} stt={index} name={item.name} status={item.status} id={item.id} toggleStatus={() => this.props.toggleStatus(item.id)} />
             })
           }
         </tbody>
